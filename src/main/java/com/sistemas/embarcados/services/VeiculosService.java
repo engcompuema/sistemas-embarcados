@@ -11,4 +11,6 @@ public interface VeiculosService {
 	
 	Veiculo findByPlaca(String placa);
 
+	Veiculo createOrUpdate(Veiculo veiculo);
+
 }

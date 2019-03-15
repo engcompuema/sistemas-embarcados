@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,18 +32,47 @@ public class VeiculoController {
 		return ResponseEntity.ok().body(response);
 
 	}
-	
-	@PostMapping(value="{placa}")
+
+	@GetMapping(value = "{placa}")
 	public ResponseEntity<Response<Veiculo>> findByPlaca(@PathVariable("placa") String placa) {
 		Response<Veiculo> response = new Response<>();
 		Veiculo veiculo = veiculoService.findByPlaca(placa);
-		if(veiculo != null) {
+		if (veiculo != null) {
 			response.setData(veiculo);
 			return ResponseEntity.ok().body(response);
-		}else {
+		} else {
 			response.getErrors().add("Veículo não Encontrado");
 			return ResponseEntity.badRequest().body(response);
 		}
+	}
+
+	@PostMapping
+	public ResponseEntity<Response<Veiculo>> create(@RequestBody Veiculo veiculo) {
+		Response<Veiculo> response = new Response<>();
+
+		try {
+			Veiculo veiculoPersisted = veiculoService.createOrUpdate(veiculo);
+			response.setData(veiculoPersisted);
+			return ResponseEntity.ok().body(response);
+		} catch (Exception e) {
+			response.getErrors().add(e.getMessage());
+			return ResponseEntity.badRequest().body(response);
+		}
+
+	}
+
+	@PutMapping
+	public ResponseEntity<Response<Veiculo>> update(@RequestBody Veiculo veiculo) {
+		Response<Veiculo> response = new Response<>();
+		try {
+			Veiculo veiculoPersisted = veiculoService.createOrUpdate(veiculo);
+			response.setData(veiculoPersisted);
+			return ResponseEntity.ok().body(response);
+		} catch (Exception e) {
+			response.getErrors().add(e.getMessage());
+			return ResponseEntity.badRequest().body(response);
+		}
+
 	}
 
 }

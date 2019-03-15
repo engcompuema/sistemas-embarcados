@@ -14,7 +14,7 @@ public class VeiculoServiceImpl implements VeiculosService {
 
 	@Autowired
 	private VeiculosRepository veiculoRepository;
-	
+
 	@Override
 	public Veiculo findVeiculoByPlaca(String placa) {
 		return this.veiculoRepository.findByPlaca(placa);
@@ -30,6 +30,9 @@ public class VeiculoServiceImpl implements VeiculosService {
 		return this.veiculoRepository.findByPlaca(placa);
 	}
 
-
+	@Override
+	public Veiculo createOrUpdate(Veiculo veiculo) {
+		return this.veiculoRepository.save(veiculo);
+	}
 
 }
