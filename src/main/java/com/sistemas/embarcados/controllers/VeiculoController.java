@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,7 +31,7 @@ public class VeiculoController {
 
 	}
 	
-	@GetMapping(value="{placa}")
+	@PostMapping(value="{placa}")
 	public ResponseEntity<Response<Veiculo>> findByPlaca(@PathVariable("placa") String placa) {
 		Response<Veiculo> response = new Response<>();
 		Veiculo veiculo = veiculoService.findByPlaca(placa);
