@@ -17,6 +17,10 @@ import com.sistemas.embarcados.entities.Veiculo;
 import com.sistemas.embarcados.responses.Response;
 import com.sistemas.embarcados.services.VeiculosService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
+@Api(value="Monitoramento Veicular")
 @RestController
 @RequestMapping("/monitoramento")
 @CrossOrigin
@@ -25,6 +29,8 @@ public class VeiculoController {
 	@Autowired
 	private VeiculosService veiculoService;
 
+	
+	@ApiOperation(value="Retorna todos os veículos cadastrados")
 	@GetMapping
 	public ResponseEntity<Response<List<Veiculo>>> findAll() {
 		Response<List<Veiculo>> response = new Response<>();
@@ -33,6 +39,8 @@ public class VeiculoController {
 
 	}
 
+	
+	@ApiOperation(value="Retorna o veículo pela placa informada")
 	@GetMapping(value = "{placa}")
 	public ResponseEntity<Response<Veiculo>> findByPlaca(@PathVariable("placa") String placa) {
 		Response<Veiculo> response = new Response<>();
@@ -46,6 +54,8 @@ public class VeiculoController {
 		}
 	}
 
+	
+	@ApiOperation(value="Cadastra um veículo")
 	@PostMapping
 	public ResponseEntity<Response<Veiculo>> create(@RequestBody Veiculo veiculo) {
 		Response<Veiculo> response = new Response<>();
@@ -61,6 +71,7 @@ public class VeiculoController {
 
 	}
 
+	@ApiOperation(value="Atualiza um veículo")
 	@PutMapping
 	public ResponseEntity<Response<Veiculo>> update(@RequestBody Veiculo veiculo) {
 		Response<Veiculo> response = new Response<>();
