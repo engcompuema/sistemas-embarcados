@@ -24,6 +24,7 @@ import io.swagger.annotations.ApiOperation;
 @RestController
 @RequestMapping("/monitoramento")
 @CrossOrigin
+
 public class VeiculoController {
 
 	@Autowired

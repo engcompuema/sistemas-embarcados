@@ -13,9 +13,12 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 import com.sistemas.embarcados.enums.StatusEnum;
 
 @Entity
+@DynamicUpdate(true)
 @Table(uniqueConstraints=@UniqueConstraint(columnNames="placa", name="placa_uk"))
 public class Veiculo implements Serializable{
 
