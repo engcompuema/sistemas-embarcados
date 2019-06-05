@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sistemas.embarcados.entities.Veiculo;
+import com.sistemas.embarcados.enums.StatusEnum;
 import com.sistemas.embarcados.responses.Response;
 import com.sistemas.embarcados.services.VeiculosService;
 
@@ -50,8 +51,11 @@ public class VeiculoController {
 			response.setData(veiculo);
 			return ResponseEntity.ok().body(response);
 		} else {
-			response.getErrors().add("Veículo não Encontrado");
-			return ResponseEntity.badRequest().body(response);
+			veiculo = new Veiculo();
+			veiculo.setPlaca(placa);
+			veiculo.setStatus(StatusEnum.NAO_LIBERADO);
+			response.setData(veiculo);
+			return ResponseEntity.ok().body(response);
 		}
 	}
 
